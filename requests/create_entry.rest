@@ -1,0 +1,10 @@
+POST http://172.31.26.60:3001/api/persons HTTP/1.1
+Content-Type: application/json
+
+{
+    "name": "Amy Lovelace",
+    "number": "1111111"
+}
+
+###
+GET http://172.31.26.60:3001/api/persons/2
