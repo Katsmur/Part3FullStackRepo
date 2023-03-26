@@ -1,3 +1,4 @@
+/* eslint-disable linebreak-style */
 require('dotenv').config()
 const express = require('express')
 const morgan = require('morgan')
@@ -9,36 +10,14 @@ app.use(express.json())
 app.use(cors())
 app.use(morgan('tiny'))
 
-let entries = [
-    { 
-      "id": 1,
-      "name": "Arto Hellas", 
-      "number": "040-123456"
-    },
-    { 
-      "id": 2,
-      "name": "Ada Lovelace", 
-      "number": "39-44-5323523"
-    },
-    { 
-      "id": 3,
-      "name": "Dan Abramov", 
-      "number": "12-43-234345"
-    },
-    { 
-      "id": 4,
-      "name": "Mary Poppendieck", 
-      "number": "39-23-6423122"
-    }
-]
 
 app.get('/', (request, response) => {
-    response.send('<h1>Hello World!</h1>')
+  response.send('<h1>Hello World!</h1>')
 })
 
-const genId = () => {
+/*const genId = () => {
   return Math.floor(Math.random() * 420)
-}
+}*/
 
 app.post('/api/persons', (request, response, next) => {
   const body = request.body
@@ -70,7 +49,7 @@ app.post('/api/persons', (request, response, next) => {
 })
 
 app.put('/api/persons/:id', (request, response, next) => {
-  const { name, number} = request.body
+  const { name, number } = request.body
   /*const person = {
     name: body.name,
     number: body.number,
@@ -79,7 +58,7 @@ app.put('/api/persons/:id', (request, response, next) => {
 
   Person.findByIdAndUpdate(
     request.params.id,
-    { name, number},
+    { name, number },
     { new: true, runValidators: true, context: 'query' }
   )
     .then(updatedPers => {
@@ -87,7 +66,7 @@ app.put('/api/persons/:id', (request, response, next) => {
     })
     .catch(error => next(error))
 })
-  
+
 app.get('/api/persons/:id', (request, response, next) => {
   /*const id = Number(request.params.id)
   const person = entries.find(person => person.id === id)
@@ -103,7 +82,7 @@ app.get('/api/persons/:id', (request, response, next) => {
       response.status(404).end()
     }
   })
-  .catch(error => next(error))
+    .catch(error => next(error))
 })
 
 app.delete('/api/persons/:id', (request, response, next) => {
@@ -112,25 +91,25 @@ app.delete('/api/persons/:id', (request, response, next) => {
 
   response.status(204).end()*/
   Person.findByIdAndRemove(request.params.id)
-    .then(result => {
+    .then(() => {
       response.status(204).end()
     })
     .catch(error => next(error))
 })
 
 app.get('/api/persons', (request, response, next) => {
-    Person.find({}).then(pers => {
-      response.json(pers)
-    })
+  Person.find({}).then(pers => {
+    response.json(pers)
+  })
     .catch(error => next(error))
 })
-  
+
 app.get('/info', (request, response, next) => {
-    const dateformat = new Date(Date.now())
-    Person.find({}).then(pers => {
-      const num = pers.length
-      response.send(`<p>Phonebook has info for ${num} people</p><p>${dateformat}</p>`)
-    })
+  const dateformat = new Date(Date.now())
+  Person.find({}).then(pers => {
+    const num = pers.length
+    response.send(`<p>Phonebook has info for ${num} people</p><p>${dateformat}</p>`)
+  })
     .catch(error => next(error))
 })
 
@@ -152,5 +131,5 @@ app.use(errorHandler)
 
 const PORT = process.env.PORT
 app.listen(PORT, () => {
-    console.log(`Server running on port ${PORT}`)
+  console.log(`Server running on port ${PORT}`)
 })
