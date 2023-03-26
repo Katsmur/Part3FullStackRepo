@@ -1,1 +1,1 @@
-DELETE http://172.31.26.60:3001/api/persons/103
+DELETE http://172.31.25.73:3001/api/persons/103
